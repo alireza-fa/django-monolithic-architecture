@@ -53,6 +53,7 @@ if DEBUG:
     THIRD_PARTY_APPS.append('debug_toolbar')
 
 LOCAL_APPS = [
+    'apps.jwt_auth.apps.JwtAuthConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
