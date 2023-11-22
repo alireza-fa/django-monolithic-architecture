@@ -20,6 +20,18 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [f'http://{os.getenv("WEB_DOMAIN")}', f'https://{os.getenv("WEB_DOMAIN")}']
 
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost',
+        f'http://{os.getenv("WEB_DOMAIN")}',
+        f'https://{os.getenv("WEB_DOMAIN")}'
+    ]
+
+else:
+    CSRF_TRUSTED_ORIGINS = [
+        f'http://{os.getenv("WEB_DOMAIN")}',
+        f'https://{os.getenv("WEB_DOMAIN")}'
+    ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
