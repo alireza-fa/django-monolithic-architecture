@@ -49,6 +49,9 @@ THIRD_PARTY_APPS = [
     'drf_spectacular',
 ]
 
+if DEBUG:
+    THIRD_PARTY_APPS.append('debug_toolbar')
+
 LOCAL_APPS = [
 ]
 
@@ -65,6 +68,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -184,6 +191,12 @@ else:
     }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+
+# DEBUG TOOLBAR
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 from config.apps_settings.drf import *
