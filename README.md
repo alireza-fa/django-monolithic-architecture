@@ -1,0 +1,1 @@
+# Django Monolithic Architecture
