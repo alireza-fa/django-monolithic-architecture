@@ -35,10 +35,10 @@ services:
     hostname: app_project
     container_name: project_app_container
     restart: on-failure
-    command: sh -c "python3 apps/manage.py makemigrations && 
-                    python3 apps/manage.py migrate --no-input && 
-                    python3 apps/manage.py collectstatic --no-input && 
-                    gunicorn -k gevent --workers 4 --chdir apps apps.config.wsgi:application -b 0.0.0.0:8000"
+    command: sh -c "python3 manage.py makemigrations && 
+                    python3 manage.py migrate --no-input && 
+                    python3 manage.py collectstatic --no-input && 
+                    gunicorn -k gevent --workers 4 --chdir config config.wsgi:application -b 0.0.0.0:8000"
     depends_on:
       - postgres_project
       - redis_project
@@ -58,7 +58,7 @@ services:
     command: nginx -g 'daemon off;'
     restart: always
     depends_on:
-      - biotech
+      - app_project
     expose:
       - "80"
     ports:
