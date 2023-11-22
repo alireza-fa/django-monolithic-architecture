@@ -143,6 +143,33 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# CACHE
+if DEBUG:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": f"redis://{os.getenv('REDIS_HOST_DEBUG')}:{os.getenv('REDIS_PORT')}/1",
+            'OPTIONS': {
+                'PASSWORD': os.getenv('REDIS_PASSWORD'),
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": f"redis://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}/1",
+            'OPTIONS': {
+                'PASSWORD': os.getenv('REDIS_PASSWORD'),
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+
 from config.apps_settings.drf import *
 from config.apps_settings.api_docs import *
 from config.apps_settings.cors import *

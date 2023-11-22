@@ -5,3 +5,6 @@ drf-spectacular==0.26.5
 psycopg2-binary==2.9.9
 python-dotenv==1.0.0
 django-cors-headers
+django-redis==5.4.0
+gunicorn==21.2.0
+gevent==23.9.1
