@@ -51,7 +51,7 @@ if DEBUG:
     THIRD_PARTY_APPS.append('debug_toolbar')
 
 LOCAL_APPS = [
-    'apps.jwt_auth.apps.JwtAuthConfig',
+    'apps.authentication.apps.JwtAuthConfig',
     'apps.common.apps.CommonConfig',
 ]
 
