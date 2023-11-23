@@ -21,7 +21,7 @@ docker-compose up -d
 
 To build the database and Redis containers, run the following command:
 ```
-docker-compose --file docker-compose-develope.yml up -d postgres_bio redis_bio
+docker-compose --file docker-compose-develope.yml up -d postgres_project redis_project
 ```
 
 
