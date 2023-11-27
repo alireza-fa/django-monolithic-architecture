@@ -1,5 +1,7 @@
 # Django Monolithic Architecture
 
+Inspired by this repository: <a href="https://github.com/amirbahador-hub/django_style_guide.git">amirbahador-hub</a>
+
 # Running the Project:
 To run the project, you need to create a .env file in the project's root directory and enter the required values. (Instructions are provided below)
 
