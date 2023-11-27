@@ -51,7 +51,7 @@ if DEBUG:
     THIRD_PARTY_APPS.append('debug_toolbar')
 
 LOCAL_APPS = [
-    # 'apps.authentication.apps.AuthenticationConfig',
+    'apps.authentication.apps.AuthenticationConfig',
     'apps.common.apps.CommonConfig',
 ]
 
