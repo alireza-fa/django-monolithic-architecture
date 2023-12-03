@@ -31,19 +31,19 @@ docker-compose --file docker-compose-develope.yml up -d postgres_project redis_p
 
 This project relies on environment variables to configure database, sms service settings etc. 
 
-Create a `.env` file in the root directory and add the following:
+Create a `.env` file in the root directory and add the following(Value is a sample):
 
 ```
 SECRET_KEY='Django Secret Key, you can generate with get_random_secret_key() function from django.core.management.utils.'
 
 DEBUG=True # Boolean
 
-WEB_DOMAIN=localhost:8000  # Example
-WEB_FRONT_DOMAIN=localhost:3000  # Example 
+WEB_DOMAIN=127.0.0.1
+WEB_FRONT_DOMAIN=localhost:3000
 
 DB_NAME=my_database
 DB_USER=root
-DB_PASS=mypassword  
+DB_PASS=mypassword
 DB_PORT=5432
 DB_HOST=myhost
 DB_HOST_DEBUG=localhost
