@@ -18,7 +18,8 @@ DEBUG = os.getenv('DEBUG') == 'True'
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = [f"http://{os.getenv('WEB_DOMAIN')}", f"https://{os.getenv('WEB_DOMAIN')}", "localhost"]
+    # ALLOWED_HOSTS = [f"http://{os.getenv('WEB_DOMAIN')}", f"https://{os.getenv('WEB_DOMAIN')}", "localhost"]
+    ALLOWED_HOSTS = ["*"]
 
 if DEBUG:
     CSRF_TRUSTED_ORIGINS = [
