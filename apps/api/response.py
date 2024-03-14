@@ -2,17 +2,17 @@ from typing import Dict
 
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
-from apps.api.response_code import ERROR_TRANSLATION
-from apps.api.response_code import BAD_REQUEST
+from apps.api.response_code import ERROR_TRANSLATION, BAD_REQUEST
 
 
-def base_response(status_code: int, code: int, success: bool = True, result: Dict | None = None) -> Response:
+def base_response(*, status_code: int, code: int, success: bool = True, result: Dict | None = None) -> Response:
     return Response(data={"result": result, "success": success, "code": code}, status=status_code)
 
 
 def base_response_with_error(
-        status_code: int, code: int, success: bool = False,
+        *, status_code: int, code: int,  success: bool = False,
         error: str | None = None, result: Dict | None = None) -> Response:
     if error:
         return Response(data={"result": result, "success": success, "code": code, "error": error}, status=status_code)
@@ -21,6 +21,6 @@ def base_response_with_error(
 
 
 def base_response_with_validation_error(
-        status_code: int, error: ValidationError, code: int = BAD_REQUEST,
-        success: bool = False, result: Dict | None = None) -> Response:
+        *, error: ValidationError, status_code: int = HTTP_400_BAD_REQUEST,
+        success: bool = False, code: int = BAD_REQUEST, result: Dict | None = None) -> Response:
     return Response(data={"result": result, "success": success, "code": code, "error": error}, status=status_code)
