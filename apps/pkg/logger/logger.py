@@ -1,9 +1,11 @@
 from django.conf import settings
 
-from apps.pkg.logger.seq.logger import SeqDataLust
+from apps.pkg.logger.dummy.logger import get_dummy_logger_once
+from apps.pkg.logger.seq.logger import get_seq_logger_once
 
 
 def new_logger():
     match settings.LOGGER:
         case "seq":
-            return SeqDataLust(api_key=settings.SEQ_API_KEY, base_url=settings.SEQ_BASE_URL)
+            return get_seq_logger_once()
+    return get_dummy_logger_once()

@@ -1,6 +1,9 @@
+import functools
 from typing import Dict
 import requests
+
 from django.utils import timezone
+from django.conf import settings
 
 from apps.pkg.logger.base import Log
 from .urls import NEW_EVENT
@@ -56,3 +59,8 @@ class SeqDataLust(Log):
             ]
         }
         requests.post(url=self.base_url + NEW_EVENT, headers={"X-Seq-ApiKey": "6CGsArH5o6q1jGeP0vsz"}, json=data)
+
+
+@functools.cache
+def get_seq_logger_once() -> Log:
+    return SeqDataLust(api_key=settings.SEQ_API_KEY, base_url=settings.SEQ_BASE_URL)
