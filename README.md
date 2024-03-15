@@ -26,6 +26,13 @@ To build the database and Redis containers, run the following command:
 docker-compose --file docker-compose-develope.yml up -d postgres_project redis_project
 ```
 
+for generate a new crypto key:
+```python
+from Crypto import Random
+
+key = Random.get_random_bytes(32)
+```
+
 
 ## Setting Environment Variables
 
