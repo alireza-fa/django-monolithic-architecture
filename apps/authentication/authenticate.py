@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import Token
 from rest_framework_simplejwt.exceptions import InvalidToken
 
 from apps.pkg.encrypto.encryption import decrypt
+from apps.authentication.services.token import get_user_by_access_token
 
 User = get_user_model()
 
@@ -25,10 +26,4 @@ class CustomAuthentication(JWTAuthentication):
         return super().get_validated_token(token.encode())
 
     def get_user(self, validated_token: Token) -> AuthUser:
-        user = User(
-            id=validated_token["user_id"],
-            username=validated_token["username"],
-            email=validated_token["email"],
-        )
-
-        return user
+        return get_user_by_access_token(token=validated_token)

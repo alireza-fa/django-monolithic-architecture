@@ -8,6 +8,18 @@ def set_token_claims(*, token: Token, claims: Dict):
         token[key] = value
 
 
+def get_token_claims(*, token: Token, claims: Dict):
+    for key in claims:
+        claims[key] = token[key]
+
+
+def get_token_string_claims(*, string_token: str, claims: Dict):
+    token = validate_token(string_token=string_token)
+
+    for key in claims:
+        claims[key] = token[key]
+
+
 def encrypt_token_function(token: Token) -> str:
     pass
 
@@ -48,10 +60,3 @@ def validate_token(string_token: str, func: validate_token_function or None = No
         func(token=token)
 
     return token
-
-
-def get_token_claims(*, string_token: str, claims: Dict):
-    token = validate_token(string_token=string_token)
-
-    for key in claims:
-        claims[key] = token[key]

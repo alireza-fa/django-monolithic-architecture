@@ -9,13 +9,13 @@ from rest_framework_simplejwt.tokens import Token
 from apps.pkg.encrypto.encryption import encrypt, decrypt
 from apps.pkg.token.token import validate_token
 from apps.utils import client
-from apps.pkg.token.token import generate_access_token_with_claims
+from apps.pkg.token.token import generate_access_token_with_claims, get_token_claims
 
 User = get_user_model()
 
 IP_ADDRESS = "ip_address"
 DEVICE_NAME = "device_name"
-USER_ID = "user_id"
+USER_ID = "id"
 USERNAME = "username"
 EMAIL = "email"
 
@@ -28,6 +28,12 @@ refresh_token_claims = {
 access_token_claims = {
     IP_ADDRESS: "",
     DEVICE_NAME: "",
+    USER_ID: 0,
+    USERNAME: "",
+    EMAIL: "",
+}
+
+user_to_map = {
     USER_ID: 0,
     USERNAME: "",
     EMAIL: "",
@@ -84,9 +90,18 @@ def refresh_access_token(request: HttpRequest, refresh_token: str) -> str:
 
     token = validate_token(string_token=refresh_token_str)
 
-    user = User.objects.get(id=token["user_id"])
+    user = User.objects.get(id=token[USER_ID])
 
     client_info = client.get_client_info(request=request)
     claims = get_access_token_claims(**client_info, user_id=user.id, username=user.username, email=user.email)
 
     return generate_access_token_with_claims(claims=claims, encrypt_func=encrypt_token)
+
+
+def get_user_by_access_token(token: Token) -> User:
+    claims = user_to_map
+    get_token_claims(token=token, claims=claims)
+
+    return User(
+        **user_to_map
+    )
