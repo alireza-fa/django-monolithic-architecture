@@ -23,7 +23,7 @@ def generate_refresh_token_with_claims(*, claims: Dict, encrypt_func: encrypt_to
     return refresh_token
 
 
-def generate_access_token_with_claims(*, claims: Dict, encrypt_func: encrypt_token_function or None = None) -> Token:
+def generate_access_token_with_claims(*, claims: Dict, encrypt_func: encrypt_token_function or None = None):
     access_token = AccessToken()
 
     set_token_claims(token=access_token, claims=claims)
