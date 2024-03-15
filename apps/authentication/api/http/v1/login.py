@@ -27,7 +27,7 @@ class UserLoginByPasswordView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             try:
-                token = login_by_password(username=serializer.validated_data["username"],
+                token = login_by_password(request=request, username=serializer.validated_data["username"],
                                           password=serializer.validated_data["password"])
             except ValueError:
                 return base_response_with_error(status_code=status.HTTP_404_NOT_FOUND,

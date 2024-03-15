@@ -8,27 +8,37 @@ def set_token_claims(*, token: Token, claims: Dict):
         token[key] = value
 
 
-def generate_refresh_token_with_claims(*, claims: Dict) -> Token:
+def encrypt_token_function(token: Token) -> str:
+    pass
+
+
+def generate_refresh_token_with_claims(*, claims: Dict, encrypt_func: encrypt_token_function or None = None) -> Token:
     refresh_token = RefreshToken()
 
     set_token_claims(token=refresh_token, claims=claims)
 
+    if encrypt_func:
+        refresh_token = encrypt_func(refresh_token)
+
     return refresh_token
 
 
-def generate_access_token_with_claims(*, claims: Dict) -> Token:
+def generate_access_token_with_claims(*, claims: Dict, encrypt_func: encrypt_token_function or None = None) -> Token:
     access_token = AccessToken()
 
     set_token_claims(token=access_token, claims=claims)
 
+    if encrypt_func:
+        access_token = encrypt_func(access_token)
+
     return access_token
 
 
-def function(token: Token):
+def validate_token_function(token: Token):
     pass
 
 
-def validate_token(string_token: str, func: function or None = None) -> Token:
+def validate_token(string_token: str, func: validate_token_function or None = None) -> Token:
     try:
         token = UntypedToken(token=string_token)
     except TokenError as err:
