@@ -2,6 +2,9 @@ from typing import Dict
 
 from django.http import HttpRequest
 
+IP_ADDRESS = "ip_address"
+DEVICE_NAME = "device_name"
+
 
 def get_client_info(request: HttpRequest) -> Dict:
     ip_address = request.META.get('REMOTE_ADDR')
@@ -10,6 +13,6 @@ def get_client_info(request: HttpRequest) -> Dict:
         ip_address = request.META['HTTP_X_FORWARDED_FOR'].split(',')[0]
 
     return {
-        "device_name": request.META.get('HTTP_USER_AGENT', ''),
-        "ip_address": ip_address
+        DEVICE_NAME: request.META.get('HTTP_USER_AGENT', ''),
+        IP_ADDRESS: ip_address
     }

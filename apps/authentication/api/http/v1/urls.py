@@ -1,10 +1,10 @@
-from django.urls import path, include
+from django.urls import path
 
-from apps.authentication.api.http.v1 import login
-from apps.authentication.api.http.v1 import register
+from apps.authentication.api.http.v1.login import UserLoginByPasswordView
+from apps.authentication.api.http.v1.register import RegisterView
 
 
 urlpatterns = [
-    path("login-by-password/", login.UserLoginByPasswordView.as_view()),
-    path("register/", register.RegisterView.as_view()),
+    path("login-by-password/", UserLoginByPasswordView.as_view()),
+    path("register/", RegisterView.as_view()),
 ]
