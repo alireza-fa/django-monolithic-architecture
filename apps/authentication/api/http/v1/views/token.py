@@ -1,19 +1,15 @@
 from django.contrib.auth import get_user_model
 
-from drf_spectacular.utils import extend_schema
-from rest_framework import serializers, status
+from rest_framework import status
 from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
 
 from apps.api import response_code
 from apps.api.response import base_response_with_error, base_response, base_response_with_validation_error
 from apps.authentication.services.token import verify_token, refresh_access_token
-
+from ..serializers.token import TokenSerializer, RefreshAccessTokenSerializer
 
 User = get_user_model()
-
-
-class TokenSerializer(serializers.Serializer):
-    token = serializers.CharField()
 
 
 class VerifyTokenView(APIView):
@@ -32,10 +28,6 @@ class VerifyTokenView(APIView):
             return base_response(status_code=status.HTTP_200_OK, code=response_code.OK)
 
         return base_response_with_validation_error(error=serializer.errors)
-
-
-class RefreshAccessTokenSerializer(serializers.Serializer):
-    refresh_token = serializers.CharField()
 
 
 class RefreshAccessToken(APIView):

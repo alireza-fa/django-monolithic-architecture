@@ -18,6 +18,8 @@ DEVICE_NAME = "device_name"
 USER_ID = "id"
 USERNAME = "username"
 EMAIL = "email"
+IS_ACTIVE = "is_active"
+IS_ADMIN = "is_admin"
 
 refresh_token_claims = {
     IP_ADDRESS: "",
@@ -31,31 +33,39 @@ access_token_claims = {
     USER_ID: 0,
     USERNAME: "",
     EMAIL: "",
+    IS_ACTIVE: False,
+    IS_ADMIN: False,
 }
 
 user_to_map = {
     USER_ID: 0,
     USERNAME: "",
     EMAIL: "",
+    IS_ACTIVE: False,
+    IS_ADMIN: False,
 }
 
 
-def get_refresh_token_claims(*, ip_address: str, device_name: str, user_id: int) -> Dict:
-    return {
-        IP_ADDRESS: ip_address,
-        DEVICE_NAME: device_name,
-        USER_ID: user_id,
-    }
+def get_refresh_token_claims(**kwargs) -> Dict:
+    claims = refresh_token_claims
+    claims[IP_ADDRESS] = ""
+    claims[DEVICE_NAME] = ""
+
+    for key in claims:
+        claims[key] = kwargs[key]
+
+    return claims
 
 
-def get_access_token_claims(*, ip_address: str, device_name: str, user_id: int, username: str, email: str) -> Dict:
-    return {
-        IP_ADDRESS: ip_address,
-        DEVICE_NAME: device_name,
-        USER_ID: user_id,
-        USERNAME: username,
-        EMAIL: email,
-    }
+def get_access_token_claims(**kwargs) -> Dict:
+    claims = access_token_claims
+    claims[IP_ADDRESS] = ""
+    claims[DEVICE_NAME] = ""
+
+    for key in claims:
+        claims[key] = kwargs[key]
+
+    return claims
 
 
 def encrypt_token(token: Token) -> str:
