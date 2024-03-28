@@ -3,6 +3,8 @@ from django.urls import path
 from apps.authentication.api.http.v1.views import sign_user, token
 
 
+app_name = "api_v1"
+
 urlpatterns = [
     # login
     path("login-by-password/", sign_user.UserLoginByPasswordView.as_view()),

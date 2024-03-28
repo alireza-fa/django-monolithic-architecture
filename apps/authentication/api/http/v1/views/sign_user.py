@@ -4,8 +4,9 @@ from rest_framework.views import APIView
 
 from apps.api import response_code
 from apps.api.response import base_response_with_error, base_response, base_response_with_validation_error
-from apps.authentication.services.sign_user import register_user
-from ..serializers.sign_user import RegisterSerializer, UserLoginByPasswordSerializer, AuthenticatedResponseSerializer
+from apps.authentication.services.sign_user import register_user, login_by_password
+from apps.authentication.api.http.v1.serializers.sign_user import RegisterSerializer, \
+    UserLoginByPasswordSerializer, AuthenticatedResponseSerializer
 
 
 class RegisterView(APIView):
@@ -30,7 +31,7 @@ class RegisterView(APIView):
 class UserLoginByPasswordView(APIView):
     serializer_class = UserLoginByPasswordSerializer
 
-    @extend_schema(request=UserLoginByPasswordSerializer, responses=AuthenticatedResponseSerializer)
+    @extend_schema(request=UserLoginByPasswordSerializer, responses=AuthenticatedResponseSerializer, tags=["v1", "Auth"])
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
