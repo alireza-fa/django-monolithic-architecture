@@ -22,7 +22,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 docs_urls = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/v1/schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger'),
+    path('api/schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger'),
     path('api/schema/', SpectacularRedocView.as_view(), name='redoc'),
 ]
 

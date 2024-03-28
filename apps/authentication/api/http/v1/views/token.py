@@ -12,10 +12,13 @@ from ..serializers.token import TokenSerializer, RefreshAccessTokenSerializer
 User = get_user_model()
 
 
+SCHEMA_TAGS = ("Auth", "Token")
+
+
 class VerifyTokenView(APIView):
     serializer_class = TokenSerializer
 
-    @extend_schema(request=TokenSerializer, responses=None)
+    @extend_schema(request=TokenSerializer, responses=None, tags=SCHEMA_TAGS)
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -33,6 +36,7 @@ class VerifyTokenView(APIView):
 class RefreshAccessToken(APIView):
     serializer_class = RefreshAccessTokenSerializer
 
+    @extend_schema(tags=SCHEMA_TAGS)
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():

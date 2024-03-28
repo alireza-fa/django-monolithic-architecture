@@ -9,9 +9,13 @@ from apps.authentication.api.http.v1.serializers.sign_user import RegisterSerial
     UserLoginByPasswordSerializer, AuthenticatedResponseSerializer
 
 
+SCHEMA_TAGS = ("Auth",)
+
+
 class RegisterView(APIView):
     serializer_class = RegisterSerializer
 
+    @extend_schema(request=RegisterSerializer, responses=AuthenticatedResponseSerializer, tags=SCHEMA_TAGS)
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -31,7 +35,7 @@ class RegisterView(APIView):
 class UserLoginByPasswordView(APIView):
     serializer_class = UserLoginByPasswordSerializer
 
-    @extend_schema(request=UserLoginByPasswordSerializer, responses=AuthenticatedResponseSerializer, tags=["v1", "Auth"])
+    @extend_schema(request=UserLoginByPasswordSerializer, responses=AuthenticatedResponseSerializer, tags=SCHEMA_TAGS)
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
