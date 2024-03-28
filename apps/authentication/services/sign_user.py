@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from django.contrib.auth import get_user_model
 
 from apps.authentication.services.token import get_refresh_token_claims, get_access_token_claims, encrypt_token
-from apps.pkg.token.token import generate_refresh_token_with_claims, generate_access_token_with_claims
+from pkg.token.token import generate_refresh_token_with_claims, generate_access_token_with_claims
 from apps.utils import client
 
 User = get_user_model()

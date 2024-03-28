@@ -1,7 +1,7 @@
 import functools
 from typing import Dict
 
-from apps.pkg.logger.base import Log
+from pkg.logger.base import Log
 
 
 class DummyLogger(Log):

@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from apps.api import response_code
 from apps.api.response import base_response_with_error, base_response, base_response_with_validation_error
-from apps.authentication.services.register import register_user
+from apps.authentication.services.sign_user import register_user
 from ..serializers.sign_user import RegisterSerializer, UserLoginByPasswordSerializer, AuthenticatedResponseSerializer
 
 

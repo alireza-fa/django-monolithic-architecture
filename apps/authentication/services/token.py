@@ -6,10 +6,10 @@ from django.contrib.auth import get_user_model
 
 from rest_framework_simplejwt.tokens import Token
 
-from apps.pkg.encrypto.encryption import encrypt, decrypt
-from apps.pkg.token.token import validate_token
+from pkg.encrypto.encryption import encrypt, decrypt
+from pkg.token.token import validate_token
 from apps.utils import client
-from apps.pkg.token.token import generate_access_token_with_claims, get_token_claims
+from pkg.token.token import generate_access_token_with_claims, get_token_claims
 
 User = get_user_model()
 

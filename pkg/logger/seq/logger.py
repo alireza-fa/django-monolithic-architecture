@@ -5,9 +5,9 @@ import requests
 from django.utils import timezone
 from django.conf import settings
 
-from apps.pkg.logger.base import Log
+from pkg.logger.base import Log
 from .urls import NEW_EVENT
-from apps.pkg.logger import log_level
+from pkg.logger import log_level
 # from apps.common.tasks import create_new_event_task
 
 
