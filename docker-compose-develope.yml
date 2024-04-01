@@ -36,50 +36,8 @@ services:
     networks:
       - main_project_network
 
-  app_project:
-    build: .
-    hostname: app_project
-    container_name: project_app_container
-    restart: always
-    command: sh -c "python3 manage.py makemigrations &&
-                    python3 manage.py migrate --no-input &&
-                    python3 manage.py collectstatic --no-input &&
-                    gunicorn -k gevent --workers 4 --chdir config config.wsgi:application -b 0.0.0.0:8000"
-    depends_on:
-      - postgres_project
-      - redis_project
-    expose:
-      - 8000
-    networks:
-      - main_project_network
-    volumes:
-      - .:/code/
-      - ./media:/code/media
-      - ./static:/code/static
-
-  nginx_project:
-    image: nginx:latest
-    hostname: nginx_project
-    container_name: nginx_project_container
-    command: nginx -g 'daemon off;'
-    restart: always
-    depends_on:
-      - app_project
-    expose:
-      - "80"
-    ports:
-      - "80:80"
-    networks:
-      - main_project_network
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./media:/code/media
-      - ./static:/code/static
-
 networks:
   main_project_network:
 
 volumes:
-  static:
-  media:
   data:
