@@ -1,7 +1,7 @@
 from django.urls import path
 
-from apps.authentication.api.http.v1.views import sign_user, token
-
+from apps.authentication.v1.views import token
+from apps.authentication.v1.views import sign_user
 
 app_name = "api_v1"
 

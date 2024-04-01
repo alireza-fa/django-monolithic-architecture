@@ -6,8 +6,8 @@ from drf_spectacular.utils import extend_schema
 
 from apps.api import response_code
 from apps.api.response import base_response_with_error, base_response, base_response_with_validation_error
-from apps.authentication.services.token import verify_token, refresh_access_token
-from ..serializers.token import TokenSerializer, RefreshAccessTokenSerializer
+from apps.authentication.v1.services.token import verify_token, refresh_access_token
+from apps.authentication.v1.serializers.token import TokenSerializer, RefreshAccessTokenSerializer
 
 User = get_user_model()
 
