@@ -48,11 +48,10 @@ THIRD_PARTY_APPS = [
     'drf_spectacular',
 ]
 
-if DEBUG:
-    THIRD_PARTY_APPS.append('debug_toolbar')
+# if DEBUG:
+#     THIRD_PARTY_APPS.append('debug_toolbar')
 
 LOCAL_APPS = [
-    'apps.authentication.apps.AuthenticationConfig',
     'apps.common.apps.CommonConfig',
 ]
 
@@ -70,8 +69,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
-    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+# if DEBUG:
+#     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
 
 ROOT_URLCONF = 'config.urls'
@@ -195,9 +194,9 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 
 # DEBUG TOOLBAR
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
 
 ENCRYPT_KEY = b'\xcaN\x9cO\xf4B\xe8\xb2+\xea\xdbh--6\xd7\xf5u\x18\x9f\x0c\xa5\xf0\xe9\xd6\x8aQ\xe2\xafp\xf8\xff'
 
